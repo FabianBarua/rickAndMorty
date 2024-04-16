@@ -1,0 +1,38 @@
+---
+const technologies = ["Astro", "React", "TailwindCSS"];
+import { motion } from "framer-motion";
+---
+
+<motion.article
+  className="font-mono border border-default-200 mt-8 relative flex p-2 rounded-2xl bg-default-100/50 shadow-xl"
+>
+  <p class="text-sm w-full text-end absolute top-2 right-3 text-default-400">
+    Abril 16, 2024
+  </p>
+
+  <a class="relative my-auto size-16 min-h-16 flex justify-center" href="#">
+    <img
+      class="hover:saturate-150 border-2 border-[#fff0] hover:border-rickBlue/80 transition-all rounded-full w-full h-full"
+      src="/avatar.png"
+    />
+  </a>
+  <header class="ml-2 text-sm">
+    <h3 class="text-sm text-default-300">Autor</h3>
+    <h2 class="text-xl">Fabian Barua</h2>
+    <div class="flex gap-1 flex-wrap">
+      {
+        technologies.map((tech) => (
+          <p class="px-2 cursor-pointer transition-colors hover:bg-default-200 hover:text-default-600 rounded-full font-extrabold text-xs border-default-100 border-2 text-default-400">
+            {tech}
+          </p>
+        ))
+      }
+    </div>
+  </header>
+</motion.article>
+
+<style>
+  .half-circle {
+    stroke-linecap: round;
+  }
+</style>

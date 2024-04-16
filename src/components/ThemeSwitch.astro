@@ -1,0 +1,41 @@
+---
+import Moon from "./Icons/Moon.astro";
+import Sun from "./Icons/Sun.astro";
+---
+
+<label
+  for="togleTheme"
+  class="rounded-full flex justify-center items-center cursor-pointer bg-default-100 hover:bg-rickBlue transition-all fill-rickBlue hover:fill-default-900 w-9 h-9"
+>
+  <input type="checkbox" id="togleTheme" transition:persist hidden />
+  <Moon class="h-6 w-6 inline dark:hidden" />
+  <Sun class="h-6 w-6 hidden dark:inline" />
+</label>
+
+<script is:inline>
+  const themeToggle = document.getElementById("togleTheme");
+  const currentTheme = localStorage.getItem("theme");
+  if (currentTheme) {
+    document.documentElement.setAttribute("data-theme", currentTheme);
+    if (currentTheme === "dark") {
+      themeToggle.checked = true;
+    }
+  }
+
+  function switchTheme() {
+    let newTheme = themeToggle.checked ? "dark" : "default";
+
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+
+    window.dispatchEvent(
+      new CustomEvent("astro:theme-change", {
+        detail: {
+          theme: newTheme,
+        },
+      })
+    );
+  }
+  themeToggle.addEventListener("change", switchTheme, false);
+  document.addEventListener("astro:after-swap", switchTheme);
+</script>

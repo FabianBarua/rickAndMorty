@@ -1,0 +1,57 @@
+---
+import ViewTransitions from "astro/components/ViewTransitions.astro";
+import ButtonAction from "../components/ButtonAction.astro";
+import Heart from "../components/Icons/Heart.astro";
+import Logo from "../components/Icons/Logo.astro";
+import ThemeSwitch from "@components/ThemeSwitch.astro";
+import "./global.css";
+import "@fontsource/inter";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html class="transition-colors duration-300" data-theme="dark" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <ViewTransitions />
+  </head>
+  <body class="transition-colors duration-300 bg-background min-h-dvh">
+    <header
+      class="sm:max-w-xl lg:max-w-5xl mx-auto h-36 w-full flex sm:flex-row flex-col sm:items-end sm:justify-between justify-end gap-6 mt-9 sm:mt-0 sm:gap-0 items-center pb-4"
+    >
+      <a href="/">
+        <Logo class="h-16 sm:h-12 w-auto fill-rickBlue" />
+      </a>
+      <nav class="h-min flex gap-3 justify-end items-center">
+        <ButtonAction textColor="blue" href="/favoritos">
+          <Heart /> Mis favoritos
+        </ButtonAction>
+        <ThemeSwitch />
+      </nav>
+    </header>
+    <slot />
+    <footer
+      class="sm:max-w-xl lg:max-w-5xl gap-2 flex flex-col text-default-400 mx-auto"
+    >
+      <div class="flex justify-between">
+        <Logo class="h-16 sm:h-12 w-auto fill-rickBlue" />
+        <p>Volver arriba</p>
+      </div>
+      <hr class="text-foreground-100" />
+      <div class="flex justify-between">
+        <p>© 2024 Rick and Morty</p>
+        <p>Desarrollado por <span class="text-rickBlue">Fabian Barua</span></p>
+      </div>
+    </footer>
+  </body>
+</html>

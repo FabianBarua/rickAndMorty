@@ -1,0 +1,22 @@
+---
+import FabianBarua from "./FabianBarua.astro";
+import { ImageHome } from "./ImageHome";
+---
+
+<section
+  class="py-4 flex lg:flex-row px-3 flex-col-reverse justify-between mt-7 sm:max-w-xl lg:max-w-5xl mx-auto"
+>
+  <div class="flex flex-col">
+    <h1 class="text-4xl text-wrap max-w-96 font-bold">
+      Enterate de todo en un solo
+      <span class="text-rickBlue">lugar.</span>
+    </h1>
+    <h2 class="text-sm mt-6 text-default-500">
+      Personajes, lugares, episodios y mucho mas.
+    </h2>
+    <FabianBarua />
+  </div>
+  <div class="h-96 sm:h-72">
+    <ImageHome client:only="react" />
+  </div>
+</section>
