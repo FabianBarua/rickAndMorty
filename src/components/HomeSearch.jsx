@@ -1,16 +1,222 @@
-import { useEffect, useState } from "react";
-import { PersonajesSection } from "./PersonajesSection";
+import { useEffect, useRef, useState } from "react";
+import { CharactersSection } from "./CharactersSection";
+import { ButtonAction } from '@/components/ButtonAction';
+import { CharacterIcon, MonitorIcon, MoreIcon, PlanetIcon, SearchIcon } from "./Icons/Icons";
+import { search } from "@/utils/services/rickAndMorty";
+import { EpisodesSection } from "./EpisodesSection";
+import { LocationsSection } from "@/components/LocationsSection";
 
+import { Select } from '@/components/Select';
 
+const ALL_TYPES = {
+    characters: 'characters',
+    episodes: 'episodes',
+    locations: 'locations'
+};
 
-export const HomeSearch = ( {initialCharacters}) => {
-    
-    const [personajes, setPersonajes] = useState(initialCharacters);
-    console.log(personajes);
-    const [espodios, setEpisodios] = useState([]);
-    const [lugares, setLugares] = useState([]);
-    
+const Search = ({ handleSubmit }) => {
     return (
-        <PersonajesSection personajes={personajes} />
+        <>
+            { /* Search */}
+            <div className="flex gap-4  sm:flex-row flex-col justify-between pb-12 pt-5 sm:pt-12 sm:pb-12 items-center">
+                <form className=" h-9 w-full max-w-72 sm:max-w-96 relative " onSubmit={handleSubmit}>
+                    <input
+                        name="search"
+                        className="  border border-default-300 rounded-full h-full w-full  px-4 text-sm  bg-default-50 outline-none pr-10 "
+                        type="text"
+                        placeholder="Personajes, episodios o lugares..."
+                    />
+                    <button type="submit" className=" group  bg-default-50 hover:bg-rickBlue  transition-colors h-[30px] p-1 w-[31px] absolute top-1/2  -translate-y-1/2 right-[1px] rounded-full flex justify-center items-center ">
+                        <SearchIcon className={' h-full  group-hover:stroke-default-900  stroke-default-400  '} />
+                    </button>
+                </form>
+                <div className="flex gap-2 flex-wrap justify-center">
+                    <ButtonAction border size="md" href="#characters">
+                        <CharacterIcon /> Personajes
+                    </ButtonAction>
+                    <ButtonAction border size="md" href="#episodes">
+                        <MonitorIcon />
+                        Episodios
+                    </ButtonAction>
+                    <ButtonAction border size="md" href="#locations">
+                        <PlanetIcon /> Lugares
+                    </ButtonAction>
+                </div>
+            </div>
+        </>
+    )
+}
+
+const SectionHeader = ({ type, name, count, updatePageNumbers, pagesNumbers, maxPageNumber }) => {
+    // TODO: EVITAR PROPS DRILLING
+    return (
+
+        <div id={type} className="flex flex-col sm:flex-row  gap-4 items-center ">
+            <h2 className="text-3xl font-bold">{name}</h2>
+            <p className="text-sm  sm:hidden flex-1  text-default-300">{count} {name} encontrados.</p>
+
+            <div className="flex gap-4 flex-1 items-center">
+                <ButtonAction href="/personajes"> Ver todos <MoreIcon /></ButtonAction>
+
+                <p className="text-sm hidden sm:inline-block flex-1  text-default-300">{count} {name} encontrados.</p>
+
+                {
+                    maxPageNumber > 1 && (
+                        <Select
+                            options={maxPageNumber}
+                            onChange={(value) => updatePageNumbers(value, type)}
+                            pagesNumbers={pagesNumbers}
+                            updatePageNumbers={(value) => updatePageNumbers(value, type)}
+                        />
+                    )
+                }
+            </div>
+
+        </div>
+    )
+}
+
+
+export const HomeSearch = ({ initialCharacters, initialEpisodes, initialLocations }) => {
+
+    const [characters, setCharacters] = useState(initialCharacters);
+    const [episodes, setEpisodes] = useState(initialEpisodes);
+    const [locations, setLocations] = useState(initialLocations);
+    const [pagesNumbers, setPagesNumbers] = useState(
+        {
+            characters: 1,
+            episodes: 1,
+            locations: 1
+        }
+    )
+
+    const [searchValue, setSearchValue] = useState('');
+
+    const updatePageNumbers = async (value, type) => {
+        setPagesNumbers(prev => {
+            return { ...prev, [type]: value }
+        });
+
+        const searchOptions = {
+            searchValue,
+            page: value,
+            searchCharacters: type === ALL_TYPES.characters,
+            searchEpisodes: type === ALL_TYPES.episodes,
+            searchLocations: type === ALL_TYPES.locations
+        };
+
+        const { searchedCharacters, searchedEpisodes, searchedLocations } = await search(searchOptions);
+
+        if (searchOptions.searchCharacters) {
+            setCharacters(searchedCharacters);
+        }
+
+        if (searchOptions.searchEpisodes) {
+            setEpisodes(searchedEpisodes);
+        }
+
+        if (searchOptions.searchLocations) {
+            setLocations(searchedLocations);
+        }
+
+    }
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const value = e.target.search?.value?.trim() || '';
+        const errors = [];
+
+        if (searchValue?.trim().toLowerCase() === value?.trim().toLowerCase()) {
+            return;
+        }
+
+        if (!value) {
+            setCharacters(initialCharacters);
+            setEpisodes(initialEpisodes);
+            setLocations(initialLocations);
+            setPagesNumbers({
+                characters: 1,
+                episodes: 1,
+                locations: 1
+            })
+        }
+
+        setSearchValue(value);
+
+        if (value.length < 3) {
+            errors.push('La búsqueda debe tener al menos 3 caracteres.');
+        }
+
+        if (errors.length) {
+            return;
+        }
+
+
+
+        const {
+            searchedCharacters,
+            searchedEpisodes,
+            searchedLocations } = await search({ searchValue: value, searchAll: true })
+        setCharacters(searchedCharacters);
+        setEpisodes(searchedEpisodes);
+        setLocations(searchedLocations);
+
+        setPagesNumbers({
+            characters: 1,
+            episodes: 1,
+            locations: 1
+        })
+    }
+
+
+    return (
+        <>
+            <div className="bg-default-50/50 py-5">
+                <div className="sm:max-w-2xl lg:max-w-5xl mx-auto p-2 sm:p-0 ">
+
+                    <Search handleSubmit={handleSubmit} />
+
+                    <div className=" flex flex-col gap-7" >
+
+
+                        <SectionHeader
+                            type={ALL_TYPES.characters}
+                            name="Personajes"
+                            count={characters?.info?.count}
+                            updatePageNumbers={updatePageNumbers}
+                            pagesNumbers={pagesNumbers.characters}
+                            maxPageNumber={characters?.info?.pages}
+                        />
+
+                        <CharactersSection characters={characters.characters} />
+
+                        { /* Episodes */}
+                        <SectionHeader
+                            type={ALL_TYPES.episodes}
+                            name="Episodios"
+                            count={episodes?.info?.count}
+                            updatePageNumbers={updatePageNumbers}
+                            pagesNumbers={pagesNumbers.episodes}
+                            maxPageNumber={episodes?.info?.pages}
+                        />
+                        <EpisodesSection episodes={episodes.episodes} />
+
+                        { /* Locations */}
+                        <SectionHeader
+                            type={ALL_TYPES.locations}
+                            name="Lugares"
+                            count={locations?.info?.count}
+                            updatePageNumbers={updatePageNumbers}
+                            pagesNumbers={pagesNumbers.locations}
+                            maxPageNumber={locations?.info?.pages}
+                        />
+                        <LocationsSection locations={locations.locations} />
+
+                    </div>
+                </div>
+            </div>
+
+        </>
     );
 }

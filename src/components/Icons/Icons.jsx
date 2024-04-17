@@ -77,7 +77,7 @@ export const InfoIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24" 
+      viewBox="0 0 24 24"
       className=" w-auto h-full"
       fill="currentColor"
     >
@@ -89,3 +89,78 @@ export const InfoIcon = () => {
   );
 }
 
+export const MoreIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+
+        d="M9.75 3.75h-4.5a1.5 1.5 0 00-1.5 1.5v4.5a1.5 1.5 0 001.5 1.5h4.5a1.5 1.5 0 001.5-1.5v-4.5a1.5 1.5 0 00-1.5-1.5zm0 6h-4.5v-4.5h4.5v4.5zm9-6h-4.5a1.5 1.5 0 00-1.5 1.5v4.5a1.5 1.5 0 001.5 1.5h4.5a1.5 1.5 0 001.5-1.5v-4.5a1.5 1.5 0 00-1.5-1.5zm0 6h-4.5v-4.5h4.5v4.5zm-9 3h-4.5a1.5 1.5 0 00-1.5 1.5v4.5a1.5 1.5 0 001.5 1.5h4.5a1.5 1.5 0 001.5-1.5v-4.5a1.5 1.5 0 00-1.5-1.5zm0 6h-4.5v-4.5h4.5v4.5zm9-6h-4.5a1.5 1.5 0 00-1.5 1.5v4.5a1.5 1.5 0 001.5 1.5h4.5a1.5 1.5 0 001.5-1.5v-4.5a1.5 1.5 0 00-1.5-1.5zm0 6h-4.5v-4.5h4.5v4.5z"
+      ></path>
+    </svg>
+
+  );
+}
+
+export const SearchIcon = ({ ...props }) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className=" w-full h-full" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+    </svg>
+
+  );
+}
+
+export const CharacterIcon = () => {
+  return (
+
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className=" h-full w-auto"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <g clipPath="url(#clip0_13_674)">
+        <path
+          d="M12 2.25A9.75 9.75 0 1021.75 12 9.76 9.76 0 0012 2.25zm0 18A8.25 8.25 0 1120.25 12 8.26 8.26 0 0112 20.25zM9.75 10.125a1.125 1.125 0 11-2.25 0 1.125 1.125 0 012.25 0zm6.75 0a1.125 1.125 0 11-2.25 0 1.125 1.125 0 012.25 0z"
+        ></path>
+      </g>
+      <defs>
+        <clipPath id="clip0_13_674">
+          <path d="M0 0H24V24H0z"></path>
+        </clipPath>
+      </defs>
+    </svg>
+
+  )
+}
+
+export const MonitorIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className=" h-full w-auto"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+
+    >
+      <path
+        d="M19.5 3.75h-15A2.25 2.25 0 002.25 6v10.5a2.25 2.25 0 002.25 2.25h15a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25zm.75 12.75a.75.75 0 01-.75.75h-15a.75.75 0 01-.75-.75V6a.75.75 0 01.75-.75h15a.75.75 0 01.75.75v10.5zm-4.5 4.5a.75.75 0 01-.75.75H9a.75.75 0 110-1.5h6a.75.75 0 01.75.75zm-.334-10.374l-4.5-3a.75.75 0 00-1.166.624v6a.75.75 0 001.166.624l4.5-3a.75.75 0 000-1.248zm-4.166 2.222V9.656l2.398 1.594-2.398 1.598z"
+      ></path>
+    </svg>
+  );
+}
+
+export const ArrowIcon = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className=" w-auto h-5">
+      <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+    </svg>
+
+  )
+}

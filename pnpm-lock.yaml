@@ -11,15 +11,6 @@ dependencies:
   '@astrojs/tailwind':
     specifier: ^5.1.0
     version: 5.1.0(astro@4.6.1)(tailwindcss@3.4.3)
-  '@fontsource-variable/inter':
-    specifier: ^5.0.17
-    version: 5.0.17
-  '@fontsource/inter':
-    specifier: ^5.0.17
-    version: 5.0.17
-  '@fontsource/twinkle-star':
-    specifier: ^5.0.19
-    version: 5.0.19
   '@nextui-org/system':
     specifier: ^2.0.15
     version: 2.0.15(@nextui-org/theme@2.1.18)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.2.1)
@@ -47,6 +38,9 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
+  react-magic-motion:
+    specifier: ^1.1.2
+    version: 1.1.2(react-dom@18.2.0)(react@18.2.0)
   tailwindcss:
     specifier: ^3.4.3
     version: 3.4.3
@@ -410,6 +404,20 @@ packages:
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
     dev: false
+
+  /@emotion/is-prop-valid@0.8.8:
+    resolution: {integrity: sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==}
+    requiresBuild: true
+    dependencies:
+      '@emotion/memoize': 0.7.4
+    dev: false
+    optional: true
+
+  /@emotion/memoize@0.7.4:
+    resolution: {integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==}
+    requiresBuild: true
+    dev: false
+    optional: true
 
   /@esbuild/aix-ppc64@0.19.12:
     resolution: {integrity: sha512-bmoCYyWdEL3wDQIVbcyzRyeKLgk2WtWLTWz1ZIAZF/EGbNOwSA6ew3PftJ1PqMiOOGu0OyFMzG53L0zqIpPeNA==}
@@ -824,18 +832,6 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
-
-  /@fontsource-variable/inter@5.0.17:
-    resolution: {integrity: sha512-sa80nNnqF8kzhBvqusWiL9vlPMVpdmOwMmDBup46Jggsr1VBqo+YuzwB36Ls+X6uHJtb8Yv3ALBHL/zGmT862A==}
-    dev: false
-
-  /@fontsource/inter@5.0.17:
-    resolution: {integrity: sha512-2meBGx1kt7u5LwzGc5Sz5rka6ZDrydg6nT3x6Wkt310vHXUchIywrO8pooWMzZdHYcyFY/cv4lEpJZgMD94bCg==}
-    dev: false
-
-  /@fontsource/twinkle-star@5.0.19:
-    resolution: {integrity: sha512-Ea0wV0BbXWS6tys8hcjViCOaSNh1ZDk0CbheMao+/VFHKZy1UB19LHHrCxksMgWxVIlu0N8+xGWj29rzBaAfhQ==}
-    dev: false
 
   /@formatjs/ecma402-abstract@1.18.2:
     resolution: {integrity: sha512-+QoPW4csYALsQIl8GbN14igZzDbuwzcpWrku9nyMXlaqAlwRBgl5V+p0vWMGFqHOw37czNXaP/lEk4wbLgcmtA==}
@@ -2228,6 +2224,24 @@ packages:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: false
 
+  /framer-motion@10.18.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-oGlDh1Q1XqYPksuTD/usb0I70hq95OUzmL9+6Zd+Hs4XV0oaISBa/UUMSjYiq6m8EUF32132mOJ8xVZS+I0S6w==}
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      tslib: 2.6.2
+    optionalDependencies:
+      '@emotion/is-prop-valid': 0.8.8
+    dev: false
+
   /framer-motion@11.0.28(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-j/vNYTCH5MX5sY/3dwMs00z1+qAqKX3iIHF762bwqlU814ooD5dDbuj3pA0LmIT5YqyryCkXEb/q+zRblin0lw==}
     peerDependencies:
@@ -3615,6 +3629,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-magic-motion@1.1.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-qYPkFViYlaO2hRQ7unCiU9V4c2tiiE2yRkdeY2oUw0zZ7pbRH8bAcPf1zQKC96mRWemp+Xo5T+49+ndAmi7gPg==}
+    dependencies:
+      framer-motion: 10.18.0(react-dom@18.2.0)(react@18.2.0)
+    transitivePeerDependencies:
+      - react
+      - react-dom
     dev: false
 
   /react-refresh@0.14.0:

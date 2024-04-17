@@ -2,38 +2,27 @@
 import { HomeSearch } from "@/components/HomeSearch";
 import Layout from "../layouts/Layout.astro";
 import HomeSection from "@/components/HomeSection.astro";
-import ButtonAction from "@/components/ButtonAction.astro";
-import MoreIcon from "@/components/Icons/MoreIcon.astro";
+import { search } from "@/utils/services/rickAndMorty";
 
-const getPersonajes = async () => {
-  const response = await fetch("https://rickandmortyapi.com/api/character");
-  const data = await response.json();
+const { searchedCharacters, searchedEpisodes, searchedLocations } =
+  await search({
+    searchValue: null,
+    searchCharacters: true,
+    searchEpisodes: true,
+    searchLocations: true,
+    searchAll: true,
+    page: 1,
+  });
 
-  const personajesMocked = data.results.map((personaje) => ({
-    id: personaje.id,
-    name: personaje.name,
-    image: personaje.image,
-    status: personaje.status,
-    origin: personaje.origin?.name,
-    species: personaje.species,
-  }));
-
-  return personajesMocked;
-};
-
-const initialCharacters = await getPersonajes();
+export const prerender = true;
 ---
 
 <Layout title="Home 🧪">
   <HomeSection />
-
-  <div class="bg-default-50/50 py-5">
-    <div class="sm:max-w-xl lg:max-w-5xl mx-auto p-2 sm:p-0">
-      <div class="flex gap-4 mb-5">
-        <h2 class="text-3xl font-bold">Personajes</h2>
-        <ButtonAction> Ver todos <MoreIcon /></ButtonAction>
-      </div>
-      <HomeSearch initialCharacters={initialCharacters} client:only="react" />
-    </div>
-  </div>
+  <HomeSearch
+    initialCharacters={searchedCharacters}
+    initialEpisodes={searchedEpisodes}
+    initialLocations={searchedLocations}
+    client:load
+  />
 </Layout>

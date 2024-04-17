@@ -4,21 +4,21 @@ import { useAstroTheme } from '@/utils/hooks/useAstroTheme';
 // TODO: Investigar como mejorar la carga con framer-motion
 
 const Image = ({ src }) => {
-  
-    const animations = {
-      initial: { y: 10, opacity: 0 },
-      animate: { y: 0, opacity: 1 },
-      transition: { duration: 0.2, delay: 0.3 }
-    }
-  
-    return (
-      <motion.img
-      className=" w-auto h-full object-cover"
+
+  const animations = {
+    initial: { y: 10, opacity: 0 },
+    animate: { y: 0, opacity: 1 },
+    transition: { duration: 0.2, delay: 0.3 }
+  }
+
+  return (
+    <motion.img
+      className=" w-auto mx-auto h-full object-cover mask"
       {...animations}
       src={src}
-      />
-    )
-  
+    />
+  )
+
 }
 
 export const ImageHome = () => {
@@ -26,7 +26,7 @@ export const ImageHome = () => {
   const { theme } = useAstroTheme();
 
   const isDark = theme === 'dark';
-  
+
   return (
     <>
 

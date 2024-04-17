@@ -17,9 +17,9 @@ type ButtonActionProps = {
 
 export const ButtonAction: React.FC<ButtonActionProps> = ({ children, href, size, border, ...props }) => {
 
-    const buttonSize = ALL_SIZES[size] || ALL_SIZES.md; 
-    
-    const buttonClass = `transition-all ${border &&  'border '} border-default-300  text-default-900 ${buttonSize} flex justify-center items-center gap-2 bg-default-100 hover:bg-rickBlue rounded-full`;
+    const buttonSize = ALL_SIZES[size] || ALL_SIZES.md;
+
+    const buttonClass = `transition-all ${border && 'border '} border-default-300  text-default-900 ${buttonSize} flex justify-center items-center gap-2 bg-default-100 hover:bg-rickBlue rounded-full px-3`;
 
 
     if (href) {
