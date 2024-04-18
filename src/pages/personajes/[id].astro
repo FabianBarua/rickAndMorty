@@ -1,0 +1,112 @@
+---
+import ButtonAction from "@/components/ButtonAction.astro";
+import { EpisodesSection } from "@/components/EpisodesSection";
+import Galaxia from "@/components/Icons/Galaxia.astro";
+import MaleIcon from "@/components/Icons/MaleIcon.astro";
+import MoreIcon from "@/components/Icons/MoreIcon.astro";
+import Layout from "@/layouts/Layout.astro";
+import { getEpisode } from "@/utils/services/rickAndMorty";
+import { getCharacter } from "@/utils/services/rickAndMorty";
+
+const { id } = Astro.params;
+
+const character = await getCharacter({ id });
+
+const episodesIds = character?.episode?.map((episode) => {
+  const episodeId = episode.split("/").pop();
+  return episodeId;
+});
+
+const episodes = await getEpisode({ id: episodesIds });
+---
+
+<Layout title={character.name}>
+  <div
+    class="sm:max-w-xl lg:max-w-5xl mx-auto h-full mb-12 overflow-hidden sm:overflow-visible px-6 sm:px-0"
+  >
+    <div
+      class="w-full flex mx-auto bg-default-50 mt-24 rounded-2xl px-12 py-8 border border-default-300"
+    >
+      <div class="flex-1">
+        <h1 class="text-3xl mb-2 font-bold">{character.name}</h1>
+        <p class="font-bold text-md text-default-500">
+          Estado: <span class="font-normal">{character.status}</span>
+        </p>
+        <p class="font-bold text-md text-default-500">
+          Especie: <span class="font-normal">{character.species}</span>
+        </p>
+        <div
+          class="flex mt-4 pt-6 border-t border-default-400 w-min gap-7 font-semibold text-sm"
+        >
+          <div class="text-center">
+            <p class="text-5xl w-24 font-bold">
+              {character?.episode?.length || 0}
+            </p>
+            <p class="text-default-400">
+              Episodio{
+                (character?.episode?.length > 1 ||
+                  character?.episode?.lenght === 0) &&
+                  "s"
+              }
+            </p>
+          </div>
+          <div>
+            <div class="h-12 py-1 flex justify-center">
+              {character?.gender === "Male" ? <MaleIcon /> : <MaleIcon />}
+            </div>
+            <p class="text-center text-default-400">{character.gender}</p>
+          </div>
+          <div class="flex flex-col justify-center items-center">
+            <div class="h-12 py-1 w-16 flex justify-center">
+              <Galaxia />
+            </div>
+            <p class="text-center text-default-400 leading-4">
+              {character?.location?.name}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="size-52 relative">
+        <img
+          class="w-full h-full object-cover rounded-2xl"
+          style={{
+            viewTransitionName: `character-image-${id}`,
+          }}
+          src={character.image}
+          alt={character.name}
+        />
+        <a
+          href={`/lugares/${character.location.id}`}
+          class="left-1/2 flex gap-2 py-1 border border-default-200 hover:bg-default-200 transition-all -translate-x-1/2 px-4 bg-default-100 rounded-full absolute w-min text-nowrap -bottom-3 text-center"
+        >
+          <MoreIcon />
+          Donde estoy?
+        </a>
+      </div>
+    </div>
+    {/* section bottom */}
+
+    <div>
+      <div class="flex justify-between items-center mt-16">
+        <h1
+          class="text-xl text-balance lg:text-3xl text-default-500 dark:text-default-400"
+        >
+          Los episodios en los que aparece
+        </h1>
+        <ButtonAction href="/episodios">
+          <MoreIcon /> Ver todos
+        </ButtonAction>
+      </div>
+      <hr class="my-5 text-foreground-100" />
+      {
+        episodes.length > 0 ? (
+          <div class=" h-[35rem] mask overflow-auto scrollbar-hide pb-16">
+            <EpisodesSection episodes={episodes} />
+          </div>
+        ) : (
+          <p class="text-center text-default-400">No hay episodios</p>
+        )
+      }
+    </div>
+  </div>
+</Layout>

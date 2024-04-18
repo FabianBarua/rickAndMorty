@@ -1,0 +1,12 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getPlanet } from "@/utils/services/rickAndMorty";
+import { LocationPage } from "@/components/LocationPage";
+
+const id = Astro.params.id;
+const planet = await getPlanet({ id });
+---
+
+<Layout title={planet?.name ? `${planet.name} 🪐` : null}>
+  <LocationPage planet={planet} client:load />
+</Layout>

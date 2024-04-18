@@ -3,7 +3,7 @@ import { CharacterCard } from "@/components/CharacterCard";
 
 export const CharactersSection = ({ characters }) => {
     return (
-        <section className=" flex gap-3 justify-between flex-wrap">
+        <section className=" flex gap-3 justify-center flex-wrap">
 
             {
 

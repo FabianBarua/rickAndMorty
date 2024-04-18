@@ -19,7 +19,7 @@ export const ButtonAction: React.FC<ButtonActionProps> = ({ children, href, size
 
     const buttonSize = ALL_SIZES[size] || ALL_SIZES.md;
 
-    const buttonClass = `transition-all ${border && 'border '} border-default-300  text-default-900 ${buttonSize} flex justify-center items-center gap-2 bg-default-100 hover:bg-rickBlue rounded-full px-3`;
+    const buttonClass = `transition-all text-nowrap ${border && 'border '} border-default-300   text-default-900 ${buttonSize} flex justify-center items-center gap-2 bg-default-100 hover:bg-rickBlue rounded-full px-3`;
 
 
     if (href) {

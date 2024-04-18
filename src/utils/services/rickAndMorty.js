@@ -10,15 +10,7 @@ export const getCharacters = async (searchValue, page = 1) => {
 
 
         if (response.ok) {
-            const charactersMocked = data.results.map((character) => ({
-                id: character.id,
-                name: character.name,
-                image: character.image,
-                status: character.status,
-                origin: character.origin?.name,
-                species: character.species,
-            }));
-
+            const charactersMocked = data.results.map((character) => (MockCharacter(character)));
 
             const characters = {
                 info: data.info,
@@ -39,6 +31,7 @@ export const getCharacters = async (searchValue, page = 1) => {
         };
     }
 };
+
 export const getEpisodes = async (searchValue, page = 1) => {
     try {
         const API_URL = `https://rickandmortyapi.com/api/episode/${optionsApi(searchValue, page)}`;
@@ -139,4 +132,113 @@ export const search = async ({ searchValue, searchCharacters, searchEpisodes, se
         searchedEpisodes: episodes || {},
         searchedLocations: locations || {},
     };
+}
+
+export const MockEpisode = (episode) => {
+    return {
+        id: episode.id,
+        name: episode.name,
+        episode: episode.episode,
+        air_date: episode.air_date,
+        characters: episode.characters,
+    }
+}
+
+export const MockCharacter = (character) => {
+
+    return {
+        id: character.id,
+        name: character.name,
+        image: character.image,
+        status: character.status === "unknown" ? "Desconocido" : character.status === "Alive" ? "Vivo" : "Muerto",
+        origin: character.origin?.name === 'unknown' ? 'Desconocido' : character.origin?.name,
+        originUrl: character.origin?.url || null,
+        location: {
+            name: character.location?.name === 'unknown' ? 'Desconocido' : character.location?.name,
+            url: character.location?.url || null,
+            id: character.location?.url?.split('/').pop() || null,
+        },
+        species: character.species,
+        gender: character.gender === 'unknown' ? 'Desconocido' : character.gender,
+        episode: character.episode,
+    }
+}
+
+export const getCharacter = async ({ id }) => {
+    try {
+        const API_URL = Array.isArray(id) ? `https://rickandmortyapi.com/api/character/${id.join(',')}` : `https://rickandmortyapi.com/api/character/${id}`;
+
+        const response = await fetch(API_URL);
+        const data = await response.json();
+
+        if (response.ok) {
+
+            if (Array.isArray(id) && data.length > 0) {
+                const mockedData = data.map((character) => MockCharacter(character));
+                return mockedData;
+            } else {
+                const mockedData = MockCharacter(data);
+                return mockedData;
+            }
+        } else {
+            throw new Error('Error fetching character');
+        }
+    } catch (error) {
+        return {
+            error: true,
+            message: 'No se encontró el personaje.'
+        };
+    }
+}
+export const getPlanet = async ({ id }) => {
+    try {
+        const API_URL = `https://rickandmortyapi.com/api/location/${id}`;
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        if (response.ok) {
+            const mockedData = {
+                id: data.id,
+                name: data.name === 'unknown' ? 'Desconocido' : data.name,
+                type: data.type === 'unknown' ? 'Desconocido' : data.type,
+                dimension: data.dimension === 'unknown' ? 'Desconocida' : data.dimension,
+                residents: data.residents
+            }
+
+            return mockedData;
+        } else {
+            throw new Error('Error fetching location');
+        }
+    } catch (error) {
+        return {
+            error: true,
+            message: 'No se encontró el lugar.'
+        }
+    }
+}
+
+
+export const getEpisode = async ({ id }) => {
+    try {
+        const API_URL = Array.isArray(id) ? `https://rickandmortyapi.com/api/episode/${id.join(',')}` : `https://rickandmortyapi.com/api/episode/${id}`;
+
+        const response = await fetch(API_URL);
+        const data = await response.json();
+
+        if (response.ok) {
+            if (Array.isArray(id) && data.length > 0) {
+                const mockedData = data.map((episode) => MockEpisode(episode));
+                return mockedData;
+            } else {
+                const mockedData = MockEpisode(data);
+                return mockedData;
+            }
+        } else {
+            throw new Error('Error fetching episodes');
+        }
+    } catch (error) {
+        return {
+            error: true,
+            message: 'No se encontraron los episodios.'
+        };
+    }
 }

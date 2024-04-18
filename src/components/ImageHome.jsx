@@ -13,7 +13,7 @@ const Image = ({ src }) => {
 
   return (
     <motion.img
-      className=" w-auto mx-auto h-full object-cover mask"
+      className=" w-auto mx-auto h-full object-cover mask "
       {...animations}
       src={src}
     />

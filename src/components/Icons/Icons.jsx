@@ -6,6 +6,7 @@ export const LiveIcon = () => {
       width="16"
       height="16"
       fill="currentColor"
+      className=" fill-success-400"
 
       viewBox="0 0 16 16"
     >
@@ -41,11 +42,11 @@ export const DeathIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="48"
-      height="48"
       fill="currentColor"
-
+      width="16"
+      height="16"
       viewBox="0 0 48 48"
+      className=" fill-danger-400"
     >
       <path
 
@@ -55,7 +56,7 @@ export const DeathIcon = () => {
   );
 }
 
-export const PlanetIcon = () => {
+export const PlanetIcon = ({ className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -63,6 +64,7 @@ export const PlanetIcon = () => {
       height="16"
       viewBox="0 0 16 16"
       fill="currentColor"
+      className={className}
 
     >
       <path

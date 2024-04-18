@@ -5,8 +5,8 @@ import { CharacterIcon, MonitorIcon, MoreIcon, PlanetIcon, SearchIcon } from "./
 import { search } from "@/utils/services/rickAndMorty";
 import { EpisodesSection } from "./EpisodesSection";
 import { LocationsSection } from "@/components/LocationsSection";
+import { SectionHeader } from "@/components/SectionHeader";
 
-import { Select } from '@/components/Select';
 
 const ALL_TYPES = {
     characters: 'characters',
@@ -44,35 +44,6 @@ const Search = ({ handleSubmit }) => {
                 </div>
             </div>
         </>
-    )
-}
-
-const SectionHeader = ({ type, name, count, updatePageNumbers, pagesNumbers, maxPageNumber }) => {
-    // TODO: EVITAR PROPS DRILLING
-    return (
-
-        <div id={type} className="flex flex-col sm:flex-row  gap-4 items-center ">
-            <h2 className="text-3xl font-bold">{name}</h2>
-            <p className="text-sm  sm:hidden flex-1  text-default-300">{count} {name} encontrados.</p>
-
-            <div className="flex gap-4 flex-1 items-center">
-                <ButtonAction href="/personajes"> Ver todos <MoreIcon /></ButtonAction>
-
-                <p className="text-sm hidden sm:inline-block flex-1  text-default-300">{count} {name} encontrados.</p>
-
-                {
-                    maxPageNumber > 1 && (
-                        <Select
-                            options={maxPageNumber}
-                            onChange={(value) => updatePageNumbers(value, type)}
-                            pagesNumbers={pagesNumbers}
-                            updatePageNumbers={(value) => updatePageNumbers(value, type)}
-                        />
-                    )
-                }
-            </div>
-
-        </div>
     )
 }
 
