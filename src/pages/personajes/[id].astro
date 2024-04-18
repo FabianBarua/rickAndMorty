@@ -1,5 +1,6 @@
 ---
 import ButtonAction from "@/components/ButtonAction.astro";
+import { ButtonCharacter } from "@/components/ButtonCharacter";
 import { EpisodesSection } from "@/components/EpisodesSection";
 import Galaxia from "@/components/Icons/Galaxia.astro";
 import MaleIcon from "@/components/Icons/MaleIcon.astro";
@@ -8,6 +9,7 @@ import Layout from "@/layouts/Layout.astro";
 import { getEpisode } from "@/utils/services/rickAndMorty";
 import { getCharacter } from "@/utils/services/rickAndMorty";
 import { getAllCharacterIds } from "@/utils/services/rickAndMorty";
+import { motion } from "framer-motion";
 
 export async function getStaticPaths() {
   const paths: { params: { id: string } }[] = await getAllCharacterIds();
@@ -97,13 +99,7 @@ if (!Array.isArray(episodes)) {
         />
         {
           character.location.id && (
-            <a
-              href={`/lugares/${character.location.id}`}
-              class="left-1/2 flex gap-2 py-1 border border-default-200 hover:bg-default-200 transition-all -translate-x-1/2 px-4 bg-default-100 rounded-full absolute w-min text-nowrap -bottom-3 text-center"
-            >
-              <MoreIcon />
-              Donde estoy?
-            </a>
+            <ButtonCharacter client:only="react" id={character?.id} />
           )
         }
       </div>
