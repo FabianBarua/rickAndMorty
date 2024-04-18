@@ -7,6 +7,19 @@ import MoreIcon from "@/components/Icons/MoreIcon.astro";
 import Layout from "@/layouts/Layout.astro";
 import { getEpisode } from "@/utils/services/rickAndMorty";
 import { getCharacter } from "@/utils/services/rickAndMorty";
+import { getAllCharacterIds } from "@/utils/services/rickAndMorty";
+
+export async function getStaticPaths() {
+  const paths: { params: { id: string } }[] = await getAllCharacterIds();
+
+  const params = paths.map((id) => {
+    return {
+      params: { id: id.toString() },
+    };
+  });
+
+  return params;
+}
 
 const { id } = Astro.params;
 
@@ -29,7 +42,7 @@ if (!Array.isArray(episodes)) {
     class="sm:max-w-xl lg:max-w-5xl mx-auto h-full mb-12 overflow-hidden sm:overflow-visible px-6 sm:px-0"
   >
     <div
-      class="w-full flex-col-reverse sm:flex-row gap-9 sm:gap-9 justify-center sm:items-center flex mx-auto bg-default-50 mt-24 rounded-2xl px-5 sm:px-12 py-8 border border-default-300"
+      class="w-full flex-col-reverse sm:flex-row gap-9 sm:gap-9 justify-center sm:items-center flex mx-auto bg-default-50 mt-12 rounded-2xl px-5 sm:px-12 py-8 border border-default-300"
     >
       <div class="flex-1">
         <h1 class="text-3xl mb-2 font-bold">{character.name}</h1>

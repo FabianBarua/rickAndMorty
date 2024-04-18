@@ -242,3 +242,47 @@ export const getEpisode = async ({ id }) => {
         };
     }
 }
+
+export const getAllLocationsIds = async () => {
+    try {
+        const API_URL = `https://rickandmortyapi.com/api/location`;
+
+        const response = await fetch(API_URL);
+        const data = await response.json();
+
+        if (response.ok) {
+            const ids = Array.from({ length: data.info.count }, (_, i) => i + 1);
+            return ids;
+        } else {
+            throw new Error('Error fetching locations');
+        }
+    } catch (error) {
+        return {
+            error: true,
+            message: 'No se encontraron lugares.'
+        };
+    }
+
+}
+
+export const getAllCharacterIds = async () => {
+    try {
+        const API_URL = `https://rickandmortyapi.com/api/character`;
+
+        const response = await fetch(API_URL);
+        const data = await response.json();
+
+        if (response.ok) {
+            const ids = Array.from({ length: data.info.count }, (_, i) => i + 1);
+            console.log(ids)
+            return ids;
+        } else {
+            throw new Error('Error fetching characters');
+        }
+    } catch (error) {
+        return {
+            error: true,
+            message: 'No se encontraron personajes.'
+        };
+    }
+}
