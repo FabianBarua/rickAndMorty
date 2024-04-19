@@ -3,7 +3,7 @@ import { CharacterCard } from "@/components/CharacterCard";
 
 export const CharactersSection = ({ characters }) => {
     return (
-        <section className=" flex gap-3 justify-center flex-wrap">
+        <section className=" gap-3 grid grid-cols-[repeat(auto-fit,_minmax(12.2rem,_1fr))] ">
 
             {
 

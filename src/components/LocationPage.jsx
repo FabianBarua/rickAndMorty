@@ -120,7 +120,7 @@ export const LocationPage = ({ planet }) => {
                 </motion.div>
             </div>
 
-            <div className=" flex justify-between items-center mt-16">
+            <div className=" flex justify-between items-center mt-16 -translate-y-">
                 <h1 className=" text-xl  text-balance  lg:text-3xl   text-default-500 dark:text-default-400"> Habitantes de {planet.name}</h1>
                 <ButtonAction href="/personajes">
                     <MoreIcon />
@@ -128,7 +128,7 @@ export const LocationPage = ({ planet }) => {
                 </ButtonAction>
             </div>
 
-            <hr className=" my-5 text-foreground-100  " />
+            <hr className=" my-5 text-foreground-100   " />
             {
                 residents.length > 0 ? (
                     <CharactersSection characters={residents} />
