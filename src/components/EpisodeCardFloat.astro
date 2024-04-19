@@ -9,7 +9,7 @@ interface Props {
 const { id, name, url, className }: Props = Astro.props;
 ---
 
-<a href={url} class={className}>
+<a href={url} class={` hidden  lg:flex sm:z-0 z-50 ${className}`}>
   <div
     style={`view-transition-name: card-episode-${id};`}
     class=`bg-default-50 transition-all w-52 group overflow-hidden relative border border-default-400 dark:border-[#fff0] pl-8 pr-12 p-5 rounded-2xl `

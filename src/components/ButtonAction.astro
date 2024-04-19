@@ -3,6 +3,7 @@ type Props = {
   href?: string;
   textColor?: "blue" | "default";
   size?: "sm" | "md" | "lg";
+  className?: string;
 };
 
 const ALL_TEXT_COLORS = {
@@ -17,11 +18,11 @@ const ALL_SIZES = {
 };
 
 //icon is an Astro component
-const { href, textColor, size }: Props = Astro.props;
+const { href, textColor, size, className }: Props = Astro.props;
 
 const ButtonColor = ALL_TEXT_COLORS[textColor] || ALL_TEXT_COLORS.default;
 
-const buttonClass = `transition-all ${ButtonColor} text-nowrap hover:text-default-900 ${ALL_SIZES[size] || "h-9 p-2 text-base"} flex justify-center items-center gap-2 bg-default-100 hover:bg-rickBlue rounded-full`;
+const buttonClass = ` ${className} transition-all ${ButtonColor} text-nowrap hover:text-default-900 ${ALL_SIZES[size] || "h-9 p-2 text-base"} flex justify-center items-center gap-2 bg-default-100 hover:bg-rickBlue rounded-full`;
 
 // si existe href retornar un a, si no un button
 ---
