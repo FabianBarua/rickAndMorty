@@ -274,7 +274,6 @@ export const getAllCharacterIds = async () => {
 
         if (response.ok) {
             const ids = Array.from({ length: data.info.count }, (_, i) => i + 1);
-            console.log(ids)
             return ids;
         } else {
             throw new Error('Error fetching characters');

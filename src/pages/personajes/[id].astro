@@ -99,7 +99,7 @@ if (!Array.isArray(episodes)) {
         />
         {
           character.location.id && (
-            <ButtonCharacter client:only="react" id={character?.id} />
+            <ButtonCharacter client:only="react" id={character?.location?.id} />
           )
         }
       </div>
