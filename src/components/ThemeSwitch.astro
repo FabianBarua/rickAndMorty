@@ -15,12 +15,12 @@ import Sun from "./Icons/Sun.astro";
 
 <script is:inline>
   const themeToggle = document.getElementById("togleTheme");
-  const currentTheme = localStorage.getItem("theme");
+
+  const currentTheme = localStorage.getItem("theme") || "dark";
+
   if (currentTheme) {
     document.documentElement.setAttribute("data-theme", currentTheme);
-    if (currentTheme === "dark") {
-      themeToggle.checked = true;
-    }
+    themeToggle.checked = currentTheme === "dark";
   }
 
   function switchTheme() {
