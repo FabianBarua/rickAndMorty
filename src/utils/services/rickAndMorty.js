@@ -286,3 +286,44 @@ export const getAllCharacterIds = async () => {
         };
     }
 }
+
+export const getTotalEpisodes = async () => {
+    try {
+        const API_URL = `https://rickandmortyapi.com/api/episode`;
+
+        const response = await fetch(API_URL);
+        const data = await response.json();
+
+        if (response.ok) {
+            return data.info.count;
+        } else {
+            throw new Error('Error fetching episodes');
+        }
+    } catch (error) {
+        return {
+            error: true,
+            message: 'No se encontraron episodios.'
+        };
+    }
+}
+
+export const getAllEpisodesIds = async () => {
+    try {
+        const API_URL = `https://rickandmortyapi.com/api/episode`;
+
+        const response = await fetch(API_URL);
+        const data = await response.json();
+
+        if (response.ok) {
+            const ids = Array.from({ length: data.info.count }, (_, i) => i + 1);
+            return ids;
+        } else {
+            throw new Error('Error fetching episodes');
+        }
+    } catch (error) {
+        return {
+            error: true,
+            message: 'No se encontraron episodios.'
+        };
+    }
+}

@@ -1,0 +1,28 @@
+---
+interface Props {
+  id: number;
+  name: string;
+  url?: string;
+  className?: string;
+}
+
+const { id, name, url, className }: Props = Astro.props;
+---
+
+<a href={url} class={className}>
+  <div
+    style={`view-transition-name: card-episode-${id};`}
+    class=`bg-default-50 transition-all w-52 group overflow-hidden relative border border-default-400 dark:border-[#fff0] pl-8 pr-12 p-5 rounded-2xl `
+  >
+    <h1 class="text-lg font-bold text-default-900 line-clamp-1">
+      {name}
+    </h1>
+
+    <div
+      class="absolute flex justify-center items-center rounded-3xl -bottom-12 -right-12 rotate-45 size-24 bg-success-50"
+    >
+    </div>
+
+    <p class="absolute bottom-2 right-2 font-bold text-success-400">#{id}</p>
+  </div>
+</a>

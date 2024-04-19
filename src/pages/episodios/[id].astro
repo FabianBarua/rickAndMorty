@@ -1,0 +1,198 @@
+---
+import type { GetStaticPaths } from "astro";
+import ButtonAction from "@/components/ButtonAction.astro";
+import { CharactersSection } from "@/components/CharactersSection";
+import EpisodeCardCenter from "@/components/EpisodeCardCenter.astro";
+import EpisodeCardFloat from "@/components/EpisodeCardFloat.astro";
+import MoreIcon from "@/components/Icons/MoreIcon.astro";
+import Layout from "@/layouts/Layout.astro";
+import {
+  getCharacter,
+  getEpisode,
+  getTotalEpisodes,
+  getAllEpisodesIds,
+} from "@/utils/services/rickAndMorty";
+
+const { id } = Astro.params;
+
+export async function getStaticPaths() {
+  const paths: { params: { id: string } }[] = await getAllEpisodesIds();
+
+  const params = paths.map((id) => {
+    return {
+      params: { id: id.toString() },
+    };
+  });
+
+  return params;
+}
+
+const [episode, totalEpisodes] = await Promise.all([
+  getEpisode({ id }),
+  getTotalEpisodes(),
+]);
+
+const next3EpisodesIds = Array.from({ length: 3 }, (_, i) => {
+  const number = Number(id) + i + 1;
+  return number > 0 && number <= totalEpisodes ? number : null;
+}).filter(Boolean);
+
+const prev3EpisodesIds = Array.from({ length: 3 }, (_, i) => {
+  const number = Number(id) - i - 1;
+  return number > 0 && number <= totalEpisodes ? number : null;
+}).filter(Boolean);
+
+const allEpisodes = await getEpisode({
+  id: next3EpisodesIds.concat(prev3EpisodesIds),
+});
+
+const prevEpisodes = allEpisodes?.slice(0, prev3EpisodesIds.length);
+const nextEpisodes = allEpisodes?.slice(prev3EpisodesIds.length);
+
+const charactersIds = episode?.characters.map((character) =>
+  character.split("/").pop()
+);
+
+let characters = await getCharacter({ id: charactersIds });
+
+if (!Array.isArray(characters)) {
+  characters = [characters];
+}
+---
+
+<Layout title={episode.name}>
+  <div class="sm:max-w-xl lg:max-w-5xl mx-auto h-full">
+    <div
+      class="relative mt-10 flex flex-col gap-4 justify-center items-center w-full h-[20rem] max-w-2xl mx-auto"
+    >
+      {
+        prevEpisodes[0] && (
+          <EpisodeCardFloat
+            id={prevEpisodes[0]?.id}
+            name={prevEpisodes[0]?.name}
+            url={`/episodios/${prevEpisodes[0]?.id}`}
+            className={`
+            scale-[0.6] rotate-6 hover:rotate-0 absolute hover:z-10 hover:scale-75 transition-all 
+            sm:top-8 sm:-left-[17rem] sm:hover:-left-[15rem]   
+            `}
+          />
+        )
+      }
+
+      {
+        prevEpisodes[1] && (
+          <EpisodeCardFloat
+            id={prevEpisodes[1]?.id}
+            name={prevEpisodes[1]?.name}
+            url={`/episodios/${prevEpisodes[1]?.id}`}
+            className={`
+            scale-[0.6] rotate-0 absolute hover:z-10 hover:scale-75 transition-all 
+            sm:top-1/2 sm:-translate-y-1/2 sm:-left-[17rem] sm:hover:-left-[15rem]   
+            `}
+          />
+        )
+      }
+
+      {
+        prevEpisodes[2] && (
+          <EpisodeCardFloat
+            id={prevEpisodes[2]?.id}
+            name={prevEpisodes[2]?.name}
+            url={`/episodios/${prevEpisodes[2]?.id}`}
+            className={`
+            scale-[0.6] -rotate-12 hover:-rotate-6 absolute hover:z-10 hover:scale-75 transition-all 
+            sm:-bottom-3 sm:-translate-y-1/2 sm:-left-[16rem] sm:hover:-left-[15rem]   
+            `}
+          />
+        )
+      }
+
+      <img
+        src="/images/r1s.png"
+        class="absolute -rotate-12 w-auto pointer-events-none
+        sm:-top-10 sm:-left-56 sm:h-[30rem]"
+        alt=""
+      />
+      <h1 class="text-3xl mb-1 font-bold">Episodio #{episode?.id}</h1>
+
+      <EpisodeCardCenter
+        id={episode.id}
+        name={episode?.name}
+        air_date={episode.air_date}
+        episode={episode.episode}
+        url={null}
+      />
+
+      {
+        nextEpisodes[0] && (
+          <EpisodeCardFloat
+            id={nextEpisodes[0]?.id}
+            name={nextEpisodes[0]?.name}
+            url={`/episodios/${nextEpisodes[0]?.id}`}
+            className={`
+                scale-[0.6] -rotate-12 hover:-rotate-3 absolute hover:z-10 hover:scale-75 transition-all 
+                sm:top-8 sm:-right-[12rem] sm:hover:-right-[10rem]   
+                `}
+          />
+        )
+      }
+
+      {
+        nextEpisodes[1] && (
+          <EpisodeCardFloat
+            id={nextEpisodes[1]?.id}
+            name={nextEpisodes[1]?.name}
+            url={`/episodios/${nextEpisodes[1]?.id}`}
+            className={`
+            scale-[0.6]  hover:rotate-3 absolute hover:z-10 hover:scale-75 transition-all 
+            sm:top-1/2 sm:-translate-y-1/2 sm:-right-[12rem] sm:hover:-right-[10rem]   
+            `}
+          />
+        )
+      }
+
+      {
+        nextEpisodes[2] && (
+          <EpisodeCardFloat
+            id={nextEpisodes[2]?.id}
+            name={nextEpisodes[2]?.name}
+            url={`/episodios/${nextEpisodes[2]?.id}`}
+            className={`
+            scale-[0.6] rotate-6 hover:rotate-3 absolute hover:z-10 hover:scale-75 transition-all 
+            sm:-bottom-3 sm:-translate-y-1/2 sm:-right-[12rem] sm:hover:-right-[10rem] sm:hover:-bottom-1   
+            `}
+          />
+        )
+      }
+
+      <img
+        src="/images/r2s.png"
+        class="absolute w-auto rotate-6 pointer-events-none
+sm:-right-40 sm:-top-14 sm:h-[30rem]"
+        alt=""
+      />
+    </div>
+    <div class="flex justify-between items-center mt-32 -translate-y-">
+      <h1
+        class="text-xl text-balance lg:text-3xl text-default-500 dark:text-default-400"
+      >
+        Personajes que aparecen
+      </h1>
+      <ButtonAction href="/personajes">
+        <MoreIcon />
+        Ver todos
+      </ButtonAction>
+    </div>
+
+    <hr class="my-5 text-foreground-100" />
+    {
+      characters.length > 0 ? (
+        <CharactersSection characters={characters} />
+      ) : (
+        <p class="text-default-400 text-center mt-16">
+          No hay personajes en esta ubicacion
+        </p>
+      )
+    }
+  </div>
+</Layout>
