@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { getAllLocationsIds, getPlanet } from "@/utils/services/rickAndMorty";
-import { LocationPage } from "@/components/LocationPage";
+import { LocationPage } from "@components/LocationPage";
 
 export async function getStaticPaths() {
   const paths: { params: { id: string } }[] = await getAllLocationsIds();

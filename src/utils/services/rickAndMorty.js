@@ -1,6 +1,6 @@
 const optionsApi = (searchValue, page) => `?${searchValue ? `&name=${searchValue}` : ''}` + `${page ? `&page=${page}` : ''}`
 
-export const getCharacters = async (searchValue, page = 1) => {
+const getCharacters = async (searchValue, page = 1) => {
     try {
 
         const API_URL = `https://rickandmortyapi.com/api/character/${optionsApi(searchValue, page)}`;
@@ -32,7 +32,7 @@ export const getCharacters = async (searchValue, page = 1) => {
     }
 };
 
-export const getEpisodes = async (searchValue, page = 1) => {
+const getEpisodes = async (searchValue, page = 1) => {
     try {
         const API_URL = `https://rickandmortyapi.com/api/episode/${optionsApi(searchValue, page)}`;
         const response = await fetch(API_URL);
@@ -68,7 +68,7 @@ export const getEpisodes = async (searchValue, page = 1) => {
 };
 
 
-export const getLocations = async (searchValue, page = 1) => {
+const getLocations = async (searchValue, page = 1) => {
 
     try {
         const API_URL = `https://rickandmortyapi.com/api/location/${optionsApi(searchValue, page)}`;

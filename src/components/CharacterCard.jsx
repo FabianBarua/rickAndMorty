@@ -1,10 +1,10 @@
 import { AlienIcon, DeathIcon, InfoIcon, LiveIcon, PlanetIcon } from '@icons/Icons';
-import { ButtonAction } from '@/components/ButtonAction';
+import { ButtonAction } from '@components/ButtonAction';
 
 export const CharacterCard = ({ id, image, name, status, species, origin }) => {
     // TODO: Ver cual queda mejor sm:w-[12.2rem] o sm:w-[15.4rem]
     return (
-        <div className=" border hover:bg-default-100 transition-all dark:border-0 border-default-400 bg-default-50 w-full max-w-96  flex flex-row sm:flex-col  rounded-2xl p-4 text-xs  gap-4 sm:gap-0 leading-4">
+        <li style={{ viewTransitionName: `character-card-${id}` }} className=" border hover:bg-default-100 transition-all dark:border-0 border-default-400 bg-default-50 w-full max-w-96  flex flex-row sm:flex-col  rounded-2xl p-4 text-xs  gap-4 sm:gap-0 leading-4">
 
             <div className='  flex-1 h-44  '>
                 <img src={image}
@@ -29,6 +29,6 @@ export const CharacterCard = ({ id, image, name, status, species, origin }) => {
                 </div>
             </div>
 
-        </div>
+        </li>
     );
 }

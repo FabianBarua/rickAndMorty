@@ -1,5 +1,5 @@
 import { InfoIcon } from '@icons/Icons';
-import { ButtonAction } from '@/components/ButtonAction';
+import { ButtonAction } from '@components/ButtonAction';
 
 const EpisodeCard = ({ id, name, episode, air_date }) => {
     return (

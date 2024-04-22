@@ -1,4 +1,4 @@
-import { CharacterCard } from "@/components/CharacterCard";
+import { CharacterCard } from "@components/CharacterCard";
 
 
 export const CharactersSection = ({ characters }) => {

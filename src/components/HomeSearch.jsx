@@ -1,52 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { CharactersSection } from "./CharactersSection";
-import { ButtonAction } from '@/components/ButtonAction';
-import { CharacterIcon, MonitorIcon, MoreIcon, PlanetIcon, SearchIcon } from "./Icons/Icons";
+import { ButtonAction } from '@components/ButtonAction';
 import { search } from "@/utils/services/rickAndMorty";
 import { EpisodesSection } from "./EpisodesSection";
-import { LocationsSection } from "@/components/LocationsSection";
-import { SectionHeader } from "@/components/SectionHeader";
+import { LocationsSection } from "@components/LocationsSection";
+import { SectionHeader } from "@components/SectionHeader";
 import { limitClass } from "@/utils/constants/rickAndMorty";
-
+import { Search } from "@components/Search";
+import { CharacterIcon, MonitorIcon, PlanetIcon } from "@icons/Icons";
 
 const ALL_TYPES = {
     characters: 'characters',
     episodes: 'episodes',
     locations: 'locations'
 };
-
-const Search = ({ handleSubmit }) => {
-    return (
-        <>
-            { /* Search */}
-            <div className="flex gap-4  sm:flex-row flex-col justify-between pb-12 pt-5 sm:pt-12 sm:pb-12 items-center">
-                <form className=" h-9 w-full max-w-72 sm:max-w-96 relative " onSubmit={handleSubmit}>
-                    <input
-                        name="search"
-                        className="  border border-default-300 rounded-full h-full w-full  px-4 text-sm  bg-default-50 outline-none pr-10 "
-                        type="text"
-                        placeholder="Personajes, episodios o lugares..."
-                    />
-                    <button type="submit" className=" group  bg-default-50 hover:bg-rickBlue  transition-colors h-[30px] p-1 w-[31px] absolute top-1/2  -translate-y-1/2 right-[1px] rounded-full flex justify-center items-center ">
-                        <SearchIcon className={' h-full  group-hover:stroke-default-900  stroke-default-400  '} />
-                    </button>
-                </form>
-                <div className="flex gap-2 flex-wrap justify-center">
-                    <ButtonAction border size="md" href="#characters">
-                        <CharacterIcon /> Personajes
-                    </ButtonAction>
-                    <ButtonAction border size="md" href="#episodes">
-                        <MonitorIcon />
-                        Episodios
-                    </ButtonAction>
-                    <ButtonAction border size="md" href="#locations">
-                        <PlanetIcon /> Lugares
-                    </ButtonAction>
-                </div>
-            </div>
-        </>
-    )
-}
 
 
 export const HomeSearch = ({ initialCharacters, initialEpisodes, initialLocations }) => {
@@ -94,9 +61,8 @@ export const HomeSearch = ({ initialCharacters, initialEpisodes, initialLocation
     }
 
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const value = e.target.search?.value?.trim() || '';
+    const handleSubmit = async (value) => {
+
         const errors = [];
 
         if (searchValue?.trim().toLowerCase() === value?.trim().toLowerCase()) {
@@ -147,7 +113,21 @@ export const HomeSearch = ({ initialCharacters, initialEpisodes, initialLocation
             <div className="bg-default-50/50 py-5">
                 <div className={limitClass}>
 
-                    <Search handleSubmit={handleSubmit} />
+                    <div className="flex gap-4  sm:flex-row flex-col justify-between pb-12 pt-5 sm:pt-12 sm:pb-12 items-center">
+                        <Search handleSubmit={handleSubmit} />
+                        <div className="flex gap-2 flex-wrap justify-center">
+                            <ButtonAction border size="md" href="#characters">
+                                <CharacterIcon /> Personajes
+                            </ButtonAction>
+                            <ButtonAction border size="md" href="#episodes">
+                                <MonitorIcon />
+                                Episodios
+                            </ButtonAction>
+                            <ButtonAction border size="md" href="#locations">
+                                <PlanetIcon /> Lugares
+                            </ButtonAction>
+                        </div>
+                    </div>
 
                     <div className=" flex flex-col gap-7" >
 

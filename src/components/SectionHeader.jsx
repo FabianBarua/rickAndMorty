@@ -1,5 +1,5 @@
-import { Select } from '@/components/Select';
-import { ButtonAction } from '@/components/ButtonAction';
+import { Select } from '@components/Select';
+import { ButtonAction } from '@components/ButtonAction';
 import { MoreIcon } from '@icons/Icons';
 
 export const SectionHeader = ({ type, name, count, updatePageNumbers, pagesNumbers, maxPageNumber }) => {

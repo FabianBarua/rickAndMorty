@@ -1,5 +1,5 @@
 import { InfoIcon } from '@icons/Icons';
-import { ButtonAction } from '@/components/ButtonAction';
+import { ButtonAction } from '@components/ButtonAction';
 
 export const LocationsSection = ({ locations }) => {
     return (
