@@ -5,15 +5,11 @@ import { search } from "@/utils/services/rickAndMorty";
 import { EpisodesSection } from "./EpisodesSection";
 import { LocationsSection } from "@components/LocationsSection";
 import { SectionHeader } from "@components/SectionHeader";
-import { limitClass } from "@/utils/constants/rickAndMorty";
+import { ALL_TYPES, limitClass } from "@/utils/constants/rickAndMorty";
 import { Search } from "@components/Search";
 import { CharacterIcon, MonitorIcon, PlanetIcon } from "@icons/Icons";
 
-const ALL_TYPES = {
-    characters: 'characters',
-    episodes: 'episodes',
-    locations: 'locations'
-};
+
 
 
 export const HomeSearch = ({ initialCharacters, initialEpisodes, initialLocations }) => {

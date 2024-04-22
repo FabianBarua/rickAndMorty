@@ -1,0 +1,18 @@
+---
+import { Characters } from "@components/Characters";
+import Layout from "@/layouts/Layout.astro";
+import { search } from "@/utils/services/rickAndMorty";
+import { Episodes } from "@components/Episodes";
+const { searchedEpisodes } = await search({
+  searchValue: "",
+  searchCharacters: false,
+  searchEpisodes: true,
+  searchLocations: false,
+  searchAll: false,
+  page: 1,
+});
+---
+
+<Layout title="Buscando episodios 🔍" limit>
+  <Episodes initialEpisodes={searchedEpisodes} client:load />
+</Layout>
