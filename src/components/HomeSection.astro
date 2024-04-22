@@ -1,10 +1,11 @@
 ---
 import FabianBarua from "./FabianBarua.astro";
 import { ImageHome } from "./ImageHome";
+import { limitClass } from "@/utils/constants/rickAndMorty";
 ---
 
 <section
-  class="py-4 flex lg:flex-row px-3 flex-col-reverse justify-between mt-7 sm:max-w-xl lg:max-w-5xl mx-auto"
+  class=`py-4 flex lg:flex-row  flex-col-reverse justify-between mt-7 ${limitClass}`
 >
   <div class="flex flex-col">
     <h1 class="text-4xl text-wrap max-w-96 font-bold">

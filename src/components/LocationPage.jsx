@@ -49,16 +49,16 @@ export const LocationPage = ({ planet }) => {
         getResidents();
 
     }, [])
-    const className = "  xs:size-[300px] size-[350px]  sm:size-[400px]  lg:size-[600px] ";
+    const className = "  xs:size-[200px] size-[350px]  sm:size-[300px]  lg:size-[600px] ";
     return (
-        <div className="sm:max-w-xl lg:max-w-5xl mx-auto h-full mb-12 overflow-hidden sm:overflow-visible px-6 sm:px-0 ">
+        <div className=" w-full h-full mb-12 overflow-hidden sm:overflow-visible  ">
             <div className=" flex   flex-col-reverse sm:flex-row">
-                <div className="  flex-1 ">
+                <div className=" flex-auto sm:flex-1 ">
                     <div className=" justify-center mt-4 sm:mt-28 ">
                         <h1 style={{ viewTransitionName: `planet-name-${planet.id}` }} className=" text-3xl  sm:text-5xl font-bold ">{planet?.name}</h1>
-                        <div className=" flex sm:flex-col lg:flex-row  gap-1 mt-3 text-sm text-default-400">
-                            <p className="  px-2 line-clamp-1 bg-default-50 border border-default-200 rounded-full" >{planet?.dimension}</p>
-                            <p className="  px-2 line-clamp-1 bg-default-50 border border-default-200 rounded-full" >{planet?.type}</p>
+                        <div className=" flex flex-wrap    gap-1 mt-3 text-sm text-default-400">
+                            <p className=" w-min px-2 text-nowrap bg-default-50 border border-default-200 rounded-full" >{planet?.type}</p>
+                            <p className=" w-min px-2 text-nowrap bg-default-50 border border-default-200 rounded-full" >{planet?.dimension}</p>
                         </div>
                         <p className=" mt-8 text-sm sm:text-base text-default-300">{planet?.residents?.length} personajes estan localizados aqui.</p>
 
@@ -77,7 +77,7 @@ export const LocationPage = ({ planet }) => {
                                 name={residents[2].name}
                                 species={residents[2].species}
                                 image={residents[2].image}
-                                style=" top-4 -right-8 lg:top-32 sm:top-10 sm:-right-6 lg:-right-2  hover:z-10 "
+                                style=" top-4 xs:-right-[6rem] -right-[3rem] lg:top-32 sm:top-10 sm:-right-20 lg:-right-2  hover:z-10 "
                                 scale={'scale-50  lg:scale-[.7]'}
 
                             />
@@ -95,7 +95,7 @@ export const LocationPage = ({ planet }) => {
                                         name={residents[1].name}
                                         species={residents[1].species}
                                         image={residents[1].image}
-                                        style=" bottom-12 sm:bottom-16 sm:right-12 right-8 lg:bottom-6 lg:-right-12"
+                                        style=" bottom-12 xs:bottom-16 sm:bottom-16 sm:right-12 right-8 lg:bottom-6 lg:-right-12"
                                         scale=' scale-50  sm:scale-[.6] lg:scale-[.7] hover:z-10'
                                     />
                                 )

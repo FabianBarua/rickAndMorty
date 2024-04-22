@@ -6,6 +6,7 @@ import { search } from "@/utils/services/rickAndMorty";
 import { EpisodesSection } from "./EpisodesSection";
 import { LocationsSection } from "@/components/LocationsSection";
 import { SectionHeader } from "@/components/SectionHeader";
+import { limitClass } from "@/utils/constants/rickAndMorty";
 
 
 const ALL_TYPES = {
@@ -144,7 +145,7 @@ export const HomeSearch = ({ initialCharacters, initialEpisodes, initialLocation
     return (
         <>
             <div className="bg-default-50/50 py-5">
-                <div className="sm:max-w-2xl lg:max-w-5xl mx-auto p-2 sm:p-0 ">
+                <div className={limitClass}>
 
                     <Search handleSubmit={handleSubmit} />
 

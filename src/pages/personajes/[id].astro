@@ -39,10 +39,8 @@ if (!Array.isArray(episodes)) {
 }
 ---
 
-<Layout title={character.name}>
-  <div
-    class="sm:max-w-xl lg:max-w-5xl mx-auto h-full mb-12 overflow-hidden sm:overflow-visible px-6 sm:px-0"
-  >
+<Layout title={character.name} limit>
+  <div class="h-full mb-12 overflow-hidden sm:overflow-visible">
     <div
       class="w-full flex-col-reverse sm:flex-row gap-9 sm:gap-9 justify-center sm:items-center flex mx-auto bg-default-50 mt-12 rounded-2xl px-5 sm:px-12 py-8 border border-default-300"
     >

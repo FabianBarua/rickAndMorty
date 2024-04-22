@@ -19,6 +19,6 @@ const id = Astro.params.id;
 const planet = await getPlanet({ id });
 ---
 
-<Layout title={planet?.name ? `${planet.name} 🪐` : null}>
+<Layout title={planet?.name ? `${planet.name} 🪐` : null} limit>
   <LocationPage planet={planet} client:load />
 </Layout>

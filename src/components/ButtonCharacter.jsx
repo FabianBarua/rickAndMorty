@@ -12,7 +12,7 @@ export const ButtonCharacter = ({ id }) => {
         >
             <a
                 href={`/lugares/${id}`}
-                className="left-1/2 flex gap-2 py-1 border border-default-200 hover:bg-default-200 transition-all -translate-x-1/2 px-4 bg-default-100 rounded-full absolute w-min text-nowrap -bottom-3 text-center"
+                className="left-1/2 flex gap-2 py-1  border border-default-200 hover:bg-default-200 transition-all -translate-x-1/2 px-4 bg-default-100 rounded-full absolute w-min text-nowrap -bottom-3 text-center"
             >
                 <MoreIcon />
                 Donde estoy?
