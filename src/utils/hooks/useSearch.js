@@ -34,7 +34,6 @@ export const useSearch = ({ type, initialData }) => {
 
 
     const handleSubmit = async (value) => {
-        console.log(value)
         const errors = [];
         if (searchValue?.trim().toLowerCase() === value?.trim().toLowerCase()) {
             return;

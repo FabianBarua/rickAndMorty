@@ -9,7 +9,6 @@ import Layout from "@/layouts/Layout.astro";
 import { getEpisode } from "@/utils/services/rickAndMorty";
 import { getCharacter } from "@/utils/services/rickAndMorty";
 import { getAllCharacterIds } from "@/utils/services/rickAndMorty";
-import { motion } from "framer-motion";
 
 export async function getStaticPaths() {
   const paths: { params: { id: string } }[] = await getAllCharacterIds();

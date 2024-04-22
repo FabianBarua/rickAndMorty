@@ -1,11 +1,10 @@
 
 import { EpisodeCard } from './EpisodeCard';
-
-
+import { GridResponsive } from './GridResponsive';
 
 export const EpisodesSection = ({ episodes }) => {
     return (
-        <section className=" grid grid-cols-[repeat(auto-fit,_minmax(9rem,_1fr))] sm:grid-cols-[repeat(auto-fit,_minmax(12.2rem,_1fr))] gap-3 justify-between ">
+        <GridResponsive>
             {
                 episodes?.map(({ id, name, episode, air_date }) => (
                     <EpisodeCard
@@ -18,7 +17,6 @@ export const EpisodesSection = ({ episodes }) => {
                 ))
 
             }
-
-        </section>
+        </GridResponsive>
     );
 }
