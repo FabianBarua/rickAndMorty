@@ -13,6 +13,7 @@
   "dependencies": {
     "@astrojs/react": "^3.3.0",
     "@astrojs/tailwind": "^5.1.0",
+    "@formkit/tempo": "^0.1.1",
     "@nextui-org/system": "^2.0.15",
     "@nextui-org/theme": "^2.1.18",
     "@types/react": "^18.2.79",
