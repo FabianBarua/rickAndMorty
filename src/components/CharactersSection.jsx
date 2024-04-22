@@ -1,5 +1,5 @@
 import { CharacterCard } from "@components/CharacterCard";
-import { GridResponsive } from "./GridResponsive";
+import { GridResponsive } from "@components/GridResponsive";
 
 
 export const CharactersSection = ({ characters }) => {

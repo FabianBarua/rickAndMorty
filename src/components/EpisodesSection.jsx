@@ -1,6 +1,6 @@
 
-import { EpisodeCard } from './EpisodeCard';
-import { GridResponsive } from './GridResponsive';
+import { EpisodeCard } from '@components/EpisodeCard';
+import { GridResponsive } from '@components/GridResponsive';
 
 export const EpisodesSection = ({ episodes }) => {
     return (

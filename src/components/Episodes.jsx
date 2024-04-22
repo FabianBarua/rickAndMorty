@@ -1,8 +1,8 @@
 import { gridResponsiveClassName } from "@components/GridResponsive";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Search } from "./Search";
+import { Search } from "@components/Search";
 import { ALL_TYPES } from "@/utils/constants/rickAndMorty";
-import { EpisodeCard } from "./EpisodeCard";
+import { EpisodeCard } from "@components/EpisodeCard";
 import { useSearch } from "@/utils/hooks/useSearch";
 
 

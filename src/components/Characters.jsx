@@ -1,9 +1,9 @@
 import { gridResponsiveClassName } from "@components/GridResponsive";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Search } from "./Search";
+import { Search } from "@components/Search";
 import { ALL_TYPES } from "@/utils/constants/rickAndMorty";
 import { useSearch } from "@/utils/hooks/useSearch";
-import { CharacterCard } from "./CharacterCard";
+import { CharacterCard } from "@components/CharacterCard";
 
 export const Characters = ({ initialCharacters }) => {
     const {

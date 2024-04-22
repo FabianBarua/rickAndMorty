@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { MoreIcon } from "./Icons/Icons"
+import { MoreIcon } from "@icons/Icons"
 
 export const ButtonCharacter = ({ id }) => {
 

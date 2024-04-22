@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowIcon } from "./Icons/Icons";
+import { ArrowIcon } from "@icons/Icons";
 
 
 export const Select = ({ options, onChange, pagesNumbers, updatePageNumbers }) => {

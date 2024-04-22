@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { CharactersSection } from "./CharactersSection";
+import { CharactersSection } from "@components/CharactersSection";
 import { ButtonAction } from '@components/ButtonAction';
 import { search } from "@/utils/services/rickAndMorty";
-import { EpisodesSection } from "./EpisodesSection";
+import { EpisodesSection } from "@components/EpisodesSection";
 import { LocationsSection } from "@components/LocationsSection";
 import { SectionHeader } from "@components/SectionHeader";
 import { ALL_TYPES, limitClass } from "@/utils/constants/rickAndMorty";

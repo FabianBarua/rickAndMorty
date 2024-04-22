@@ -1,9 +1,9 @@
 import { getCharacter, MockCharacter } from "@/utils/services/rickAndMorty";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { CharactersSection } from "./CharactersSection";
-import { ButtonAction } from "./ButtonAction";
-import { MoreIcon } from "./Icons/Icons";
+import { CharactersSection } from "@components/CharactersSection";
+import { ButtonAction } from "@components/ButtonAction";
+import { MoreIcon } from "@icons/Icons";
 
 const ResidentCard = ({ name, image, species, style, id, scale }) => {
 
